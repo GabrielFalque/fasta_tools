@@ -32,9 +32,10 @@ from Bio import SeqIO
 def main():
 
     parser = argparse.ArgumentParser(
-        description=" ".join(
+        description=" ".join([
             "Script for separating an alignement file into multiple gene alignement files based on",
             "reference annotated file from NCBI dataset."
+        ]
         )
     )
     # Arguments definition
@@ -42,10 +43,10 @@ def main():
         "-r", "--ref_file",
         type=str,
         required=True,
-        help=" ".join(
+        help=" ".join([
             "Text (.txt) file containing annotated reference sequence with genes. This type of file can be",
             "downladed on NCBI database."
-        )
+        ])
     )
 
     parser.add_argument(
@@ -108,25 +109,25 @@ def main():
 
 
     def parse_gene_info(ref_record):
-    """
-    Parses gene information from a reference annotation file.
+        """
+        Parses gene information from a reference annotation file.
 
-    This function extracts gene names, their start and end positions, 
-    and their sequences from the provided reference records. It assumes
-    that the reference records contain annotation fields like `[gene=...]`
-    and `[location=...]`.
+        This function extracts gene names, their start and end positions, 
+        and their sequences from the provided reference records. It assumes
+        that the reference records contain annotation fields like `[gene=...]`
+        and `[location=...]`.
 
-    Args:
-        ref_record (list of SeqRecord): A list of `SeqRecord` objects representing 
-            the reference sequences with annotations.
+        Args:
+            ref_record (list of SeqRecord): A list of `SeqRecord` objects representing 
+                the reference sequences with annotations.
 
-    Returns:
-        list of dict: A list of dictionaries where each dictionary contains:
-            - "gene_name" (str): The name of the gene.
-            - "start" (int): The start position of the gene (1-based).
-            - "end" (int): The end position of the gene (1-based).
-            - "sequence" (str): The nucleotide sequence of the gene.
-    """
+        Returns:
+            list of dict: A list of dictionaries where each dictionary contains:
+                - "gene_name" (str): The name of the gene.
+                - "start" (int): The start position of the gene (1-based).
+                - "end" (int): The end position of the gene (1-based).
+                - "sequence" (str): The nucleotide sequence of the gene.
+        """
 
         genes_info = []
 
@@ -157,16 +158,16 @@ def main():
         return genes_info
 
     def get_coordinates_in_alignment(genes_info, ref_sequence_record):
-    """
-    Locate gene sequences within the aligned reference sequence and retrieve their coordinates.
+        """
+        Locate gene sequences within the aligned reference sequence and retrieve their coordinates.
 
-    Args:
-        genes_info (list): A list of dictionaries containing gene information (name, location, sequence).
-        ref_sequence_record (SeqRecord): The reference sequence record from the alignment file.
+        Args:
+            genes_info (list): A list of dictionaries containing gene information (name, location, sequence).
+            ref_sequence_record (SeqRecord): The reference sequence record from the alignment file.
 
-    Returns:
-        list: A list of dictionaries containing gene name and alignment coordinates (start and end positions).
-    """
+        Returns:
+            list: A list of dictionaries containing gene name and alignment coordinates (start and end positions).
+        """
         seq_ref = str(ref_sequence_record.seq)
         aligned_genes = []
 
